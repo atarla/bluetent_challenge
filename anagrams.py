@@ -1,14 +1,17 @@
 def isAnagram(str1, str2):
-    list_str1 = list(str1)
-    list_str1.sort()  # sort first string
-    list_str2 = list(str2)
-    list_str2.sort() # sort second string
+    string_match = {}
 
-    return (list_str1 == list_str2)
+    for letter in str1:
+        string_match[letter] = string_match.get(letter, 0) + 1  # increment letter counter
+    for letter in str2:
+        string_match[letter] = string_match.get(letter, 0) - 1  # decrement if letter fount in second string
+    # print(string_match.values())
+    if any(val != 0 for val in string_match.values()):  # Anagram if all letter counter are zero
+        return "false"
+    else:
+        return "true"
+
 
 
 print(isAnagram('anagram', 'nagaram'))
 print(isAnagram('cat', 'rat'))
-
-# better way using hashmap
-# to increment a count(occurance) of each letter in str1 and decrement count of that letter in str2. if hashmap=0 they are anagrams
